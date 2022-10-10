@@ -11,6 +11,15 @@ import { ReactComponent as MakeImageIcon } from './assets/collections_black_24dp
 import Block from 'app/components/Block';
 import SearchInput from '../Input/SearchInput';
 
+import ReactQuill from 'react-quill';
+
+let icons = ReactQuill.Quill.import('ui/icons');
+
+icons['header'] = <MakeSizeIcon />;
+icons['bold'] = <MakeBoldIcon />;
+icons['list'] = <MakeTodoIcon />;
+icons['image'] = <MakeImageIcon />;
+
 const Box = styled.div`
   width: 100%;
   height: 60px;
@@ -18,8 +27,9 @@ const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 0;
-  border-bottom: 1px solid #e9e9e9;
+  border: 0 !important;
+  border-bottom: 1px solid #e9e9e9 !important;
+  padding: 0 !important;
 `;
 
 const Menu = styled.div`
@@ -53,7 +63,7 @@ const RightMenu = styled(Menu)`
 
 export default function MemoToolbar() {
   return (
-    <Box>
+    <Box id="toolbar">
       <LeftMenu>
         <TitleText style={{ marginLeft: '5px' }}>MEMO</TitleText>
         <SmallButton Icon={() => <PostDeleteIcon />} onClick={() => {}} />
@@ -61,14 +71,32 @@ export default function MemoToolbar() {
       <RightMenu>
         <SmallButton Icon={() => <PostAddIcon />} onClick={() => {}} />
         <div>
-          <SmallButton Icon={() => <MakeBoldIcon />} onClick={() => {}} />
+          <SmallButton
+            className="ql-bold"
+            Icon={() => <MakeBoldIcon />}
+            onClick={() => {}}
+          />
           <Block marginRight="5px" />
-          <SmallButton Icon={() => <MakeSizeIcon />} onClick={() => {}} />
+          <SmallButton
+            className="ql-header"
+            value="1"
+            Icon={() => <MakeSizeIcon />}
+            onClick={() => {}}
+          />
           <Block marginRight="5px" />
-          <SmallButton Icon={() => <MakeTodoIcon />} onClick={() => {}} />
+          <SmallButton
+            className="ql-list"
+            value="check"
+            Icon={() => <MakeTodoIcon />}
+            onClick={() => {}}
+          />
         </div>
         <div>
-          <SmallButton Icon={() => <MakeImageIcon />} onClick={() => {}} />
+          <SmallButton
+            className="ql-image"
+            Icon={() => <MakeImageIcon />}
+            onClick={() => {}}
+          />
           <Block marginRight="5px" />
           <SearchInput />
         </div>
