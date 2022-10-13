@@ -1,7 +1,10 @@
-interface MemoItem {
-  id: string;
-  preview: string;
+interface MemoItemContent {
   content: string;
-  create_at: string;
+  preview: string;
+}
+
+interface MemoItem extends MemoItemContent {
+  id: string;
+  created_at: string;
   selected: boolean;
 }

@@ -12,6 +12,9 @@ import Block from 'app/components/Block';
 import SearchInput from '../Input/SearchInput';
 
 import ReactQuill from 'react-quill';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMemoSlice } from 'store/memo';
+import { SearchMemoListSelector } from 'store/memo/selectors';
 
 let icons = ReactQuill.Quill.import('ui/icons');
 
@@ -62,14 +65,28 @@ const RightMenu = styled(Menu)`
 `;
 
 export default function MemoToolbar() {
+  const { MemoActions } = useMemoSlice();
+  const dispatch = useDispatch();
+  const search = useSelector(SearchMemoListSelector);
+
   return (
     <Box id="toolbar">
       <LeftMenu>
         <TitleText style={{ marginLeft: '5px' }}>MEMO</TitleText>
-        <SmallButton Icon={() => <PostDeleteIcon />} onClick={() => {}} />
+        <SmallButton
+          Icon={() => <PostDeleteIcon />}
+          onClick={() => dispatch(MemoActions.deleteMemo())}
+        />
       </LeftMenu>
       <RightMenu>
-        <SmallButton Icon={() => <PostAddIcon />} onClick={() => {}} />
+        <SmallButton
+          Icon={() => <PostAddIcon />}
+          onClick={() =>
+            dispatch(
+              MemoActions.addMemo('내용을 입력해주세요', '내용을 입력해주세요'),
+            )
+          }
+        />
         <div>
           <SmallButton
             className="ql-bold"
@@ -98,7 +115,12 @@ export default function MemoToolbar() {
             onClick={() => {}}
           />
           <Block marginRight="5px" />
-          <SearchInput />
+          <SearchInput
+            search={search}
+            onChange={value =>
+              dispatch(MemoActions.searchMemo({ search: value }))
+            }
+          />
         </div>
       </RightMenu>
     </Box>

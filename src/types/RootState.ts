@@ -7,6 +7,5 @@ import { MemoState } from 'store/memo/types';
   You have to declare them here manually
 */
 export interface RootState {
-  // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
   memo: MemoState;
 }

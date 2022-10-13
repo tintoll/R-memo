@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ReactComponent as SearchIcon } from './assets/search_black_24dp.svg';
 
@@ -28,16 +28,21 @@ const Input = styled.input`
   }
 `;
 
-export default function SearchInput() {
-  const [content, setContent] = useState('');
+export default function SearchInput({
+  search,
+  onChange,
+}: {
+  search: string;
+  onChange: (content: string) => void;
+}) {
   return (
     <Box>
       <SearchIcon />
       <Input
         type="text"
-        value={content}
+        value={search}
         placeholder="검색"
-        onChange={e => setContent(e.target.value)}
+        onChange={e => onChange(e.target.value)}
       />
     </Box>
   );

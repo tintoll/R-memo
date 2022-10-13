@@ -1,3 +1,4 @@
 export interface MemoState {
-  memoList: MemoItem[];
+  search: string;
+  memolist: Array<MemoItem>;
 }
