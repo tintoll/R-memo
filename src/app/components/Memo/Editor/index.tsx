@@ -22,6 +22,10 @@ const Box = styled.div`
   & .ql-container.ql-snow {
     border: 0 !important;
   }
+
+  & .ql-container > .ql-editor {
+    min-height: 50vh;
+  }
 `;
 
 const MemoDate = styled.div`
@@ -47,7 +51,9 @@ export default function MemoEditor() {
     <Box>
       <Block marginBottom="5px" />
       <MemoDate>
-        {new Date(selectedMemo?.created_at ?? '').toLocaleString()}
+        {selectedMemo !== undefined
+          ? new Date(selectedMemo?.created_at ?? '').toLocaleString()
+          : '새 메모를 생성해주세요'}
       </MemoDate>
       <ReactQuill
         theme="snow"
@@ -75,6 +81,7 @@ export default function MemoEditor() {
             container: '#toolbar',
           },
         }}
+        readOnly={selectedMemo === undefined}
         formats={['bold', 'size', 'header', 'image', 'list', 'link']}
       />
     </Box>
