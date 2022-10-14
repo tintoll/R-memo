@@ -65,7 +65,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn run workbox",
+    "workbox": "workbox generateSW workbox-config.ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:prod": "yarn run build && serve -s build",
@@ -120,5 +121,8 @@
         "statements": 90
       }
     }
+  },
+  "devDependencies": {
+    "workbox-cli": "6.5.4"
   }
 }
